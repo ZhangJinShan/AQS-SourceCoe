@@ -318,7 +318,7 @@
 ## 贯穿性约定（所有 TU 通用）
 
 1. **源码版本**：以 JDK 8 的 AQS 为主线（`Unsafe` CAS），完成后用 30 分钟 diff JDK 17 版（`VarHandle`、`Node` 精简），写一行结论即可。
-   **注**：项目已内置 JDK 17.0.20.1 的 AQS 拷贝（`src/main/java/com/example/aqs/locks/`，与官方逐字一致、仅 4 行 import 适配，见 README），本计划各 TU「源码阅读范围」默认读这份拷贝；加日志/埋点直接改它，改动请带 `// [STUDY]` 标记。
+   **注**：项目已内置 JDK 17.0.20.1 的 AQS 及锁/工具类拷贝（`com.example.aqs.locks` / `com.example.aqs.concurrent`，与官方逐字一致、仅少量 import 适配，见 README），本计划各 TU「源码阅读范围」默认读这份拷贝；加日志/埋点直接改它，改动请带 `// [STUDY]` 标记。TU-12 的 `ThreadPoolExecutor` 未内置，届时直读 JDK 源或按 README 说明补拷。
 2. **阅读方法**：先通读方法注释 → 手画流程 → 再逐行读实现 → 最后用调试器验证。**每个 TU 至少断点一次**，日志/断点结论要落到复盘输出里。
 3. **实操代码规范**：每个 demo 一个独立类，类名带 TU 编号；并发实验必须有可重复的对齐手段（`CyclicBarrier`/`CountDownLatch`），禁止裸 `sleep` 碰运气。
 4. **验收门槛**：复盘输出里的「需要验证的点」逐条给出证据（源码行号 / 实验日志 / 断点截图），缺证据不算完成。
